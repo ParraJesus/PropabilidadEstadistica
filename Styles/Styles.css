@@ -1,0 +1,314 @@
+/******************************************** General ********************************************/
+
+:root {
+  --title_color: #4d4d4d;
+  --subtitle_color: #737373;
+  --paragrahp_color: #858585;
+  --blue_0: #50486a;
+  --blue_1: #616090;
+  --blue_2: #79adc0;
+  --blue_3: #b5eaec;
+  --green_0: #698949;
+  --white: #ebebeb;
+
+  --shadow-color-1: #000a;
+  --shadow-color-2: #0006;
+
+  font-size: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  overflow: hidden;
+}
+
+h1 {
+  color: var(--title_color);
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 {
+  color: var(--blue_2);
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
+
+p {
+  color: var(--paragrahp_color);
+  font-size: 14px;
+  text-align: justify;
+}
+
+.button_general {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button_first {
+  background-color: var(--blue_2);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+}
+
+.button_second {
+  background-color: transparent;
+  border: 2px solid var(--blue_2);
+  color: var(--blue_2);
+  padding: 8px;
+}
+
+.button_general:hover {
+  opacity: 0.8;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: var(--blue_3);
+}
+
+textarea {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: var(--paragrahp_color);
+  border: 2px solid var(--blue_3);
+  border-radius: 4px;
+  resize: none;
+  outline: none;
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+}
+
+textarea:focus {
+  border: 2px solid var(--blue_1);
+}
+
+.shadow {
+  box-shadow: 0 0 20px 1px var(--shadow-color-2);
+}
+
+/******************************************** Header ********************************************/
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue_1);
+  width: 100%;
+  min-height: 50px;
+  border-bottom: 2px solid var(--blue_3);
+}
+
+.header h1 {
+  color: var(--white);
+}
+
+/******************************************** Sidebar ********************************************/
+
+aside {
+  background-color: var(--blue_0);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user_pfp {
+  background-image: url("https://cdna.artstation.com/p/assets/images/images/075/917/646/large/gabriel-parra-4.jpg?1715737858");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  box-shadow: 0 0 10px 1px var(--shadow-color-2);
+  height: 60px;
+  width: 60px;
+  margin: 10px 0 0 0;
+}
+
+ul {
+  list-style: none;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+ul hr {
+  margin: 20px;
+  width: 90%;
+  background-color: var(--blue_1);
+}
+
+a {
+  width: 90%;
+  text-decoration: none;
+  color: var(--white);
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+/******************************************** Main ********************************************/
+
+.content_container {
+  height: 100vh;
+  overflow-y: auto;
+  background-color: var(--white);
+}
+
+.content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  max-width: 982px;
+  flex: 2;
+  min-height: 100vh;
+}
+
+h2,
+p,
+input,
+button,
+hr {
+  margin: 30px 0;
+}
+
+main ul {
+  color: var(--paragrahp_color);
+  display: inline;
+  list-style: disc;
+}
+
+main li {
+  text-align: left;
+  margin: 0 0 0 20px;
+}
+
+.styled_table {
+  border-collapse: collapse;
+  font-family: sans-serif;
+  min-width: 400px;
+  width: 100%;
+
+  color: var(--paragrahp_color);
+  background-color: var(--white);
+}
+
+.styled_table thead tr {
+  background-color: var(--blue_2);
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled_table th,
+.styled_table td {
+  padding: 12px 15px;
+}
+
+.styled_table tbody tr:nth-of-type(even) {
+  background-color: #ebebeb;
+}
+
+.styled_table tbody tr {
+  background-color: #ffffff;
+}
+
+.styled_table tbody tr:last-of-type {
+  border-bottom: 2px solid var(--blue_2);
+}
+
+.toggleable_container {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.canvas_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas_container canvas {
+  min-width: 100%;
+}
+
+.canvas_button_container {
+  display: flex;
+  align-items: center;
+}
+
+.icon-button {
+  background-color: var(--blue_2);
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  opacity: 80%;
+}
+
+.icon-button-disable {
+  background-color: var(--subtitle_color);
+  cursor: default;
+}
+
+.icon-button-disable:hover {
+  opacity: 100%;
+}
+
+#grahpLeftButton {
+  border-radius: 4px 0 0 4px;
+}
+
+#grahpRightButton {
+  border-radius: 0 4px 4px 0;
+}
+/******************************************** Footer ********************************************/
+
+footer {
+  color: var(--white);
+  background-color: var(--blue_1);
+  border-top: 2px solid var(--blue_3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 140px;
+}
+
+footer p {
+  color: var(--white);
+  text-align: center;
+  line-height: 2;
+}

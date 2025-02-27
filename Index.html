@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Probabilidad y estadística</title>
+    <link rel="stylesheet" href="Styles/Styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside>
+      <div
+        alt="Foto de usuario"
+        class="user_pfp"
+        title="Jesús Gabriel Parra"
+      ></div>
+      <ul>
+        <hr />
+        <li>
+          <a href="#">Primer Filtro</a>
+        </li>
+        <hr />
+        <li>
+          <a href="Pages/SegundoFiltro.html">Segundo Filtro</a>
+        </li>
+        <hr />
+        <li>
+          <a href="Pages/TercerFiltro.html">Tercer Filtro</a>
+        </li>
+        <hr />
+        <li>
+          <a href="Pages/CuartoFiltro.html">Cuarto Filtro</a>
+        </li>
+        <hr />
+        <li>
+          <a href="Pages/Tabulacion.html">Tabulación de Datos</a>
+        </li>
+        <hr />
+      </ul>
+    </aside>
+    <div class="content_container">
+      <div class="content">
+        <header class="header shadow">
+          <h1>Primer Filtro</h1>
+        </header>
+        <main>
+          <h2>¿En qué consiste?</h2>
+          <p>
+            Al ingresar un dataset en la entrada, se calculará iterativamente la
+            desviación estándar, se 'zetalirarán' los datos y se cortarán
+            completamente los datos raros -aquellos cuyo número de desviaciones
+            estándar de distancia sea iguales o mayores a tres-. Como resultado
+            entregará la siguiente información por cada iteración:
+          </p>
+          <ul>
+            <li>Desviación estándar de los datos actuales</li>
+            <li>Lista de ítems removidos</li>
+            <li>lista de valores restantes</li>
+            <li>Histograma</li>
+          </ul>
+          <p></p>
+          <textarea
+            name="datasetInput"
+            id="datasetInput"
+            placeholder="Ingrese los datos separados por comas aquí."
+          ></textarea>
+          <button class="button_first button_general" id="dataButton">
+            Ingresar Datos
+          </button>
+          <div class="toggleable_container" id="toggleable_container">
+            <hr />
+            <h2>Datos calculados</h2>
+            <table class="styled_table" id="dataTable">
+              <thead>
+                <tr>
+                  <th>Iteración</th>
+                  <th>Media</th>
+                  <th>Mediana</th>
+                  <th>Desviación Estándar</th>
+                  <th>Items Descartados</th>
+                  <th>Items Restantes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <h2>Evolución de los datos a través de las iteraciones</h2>
+            <div class="canvas_container">
+              <canvas id="histogramCanvas"></canvas>
+              <div class="canvas_button_container">
+                <button class="icon-button" id="grahpLeftButton">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="icon-button" id="grahpRightButton">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="shadow">
+          <p>
+            Proyecto realizado por Jesús Gabriel Parra Dugarte y Elkin Ariel
+            Morillo Quenguan <br />
+            GitHub: ParraJesus, Elkin2814 <br />
+            Curso de Probabilidad y Estadística <br />
+            Facultad de Ingeniería Electrónica y Telecomunicaciones <br />
+            Universidad del Cauca 2025-1
+          </p>
+        </footer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/Scripts/DataInputManagement.js"></script>
+    <script src="Scripts/Filter_1.js"></script>
+    <script src="Scripts/ToggleableComponent.js"></script>
+  </body>
+</html>
