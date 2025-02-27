@@ -1,25 +1,15 @@
 //Datos de entrada
 
-let conjuntoDatos = [];
+let rawDataSet = [];
 
 //Datos calculados
 
 let meanSet = [];
 let medianSet = [];
-let standardDeviation = [];
+let standardDeviationSet = [];
 let discardedItems = [];
 let remainingItems = [];
 let currentDataSetIndex = 0;
-
-meanSet = [5.2, 3.8, 7.1];
-medianSet = [5.0, 3.5, 7.0];
-standardDeviation = [1.2, 0.9, 1.5];
-discardedItems = [[1.2, 1.5], [2.1], [3.4, 3.6, 3.8]];
-remainingItems = [
-  [4.8, 5.2, 5.6, 50, 51],
-  [3.1, 3.5, 4.2],
-  [6.8, 7.1, 7.5],
-];
 
 //Componentes html
 const dataTable = document.getElementById("dataTable");
@@ -28,14 +18,89 @@ const grahpRightButton = document.getElementById("grahpRightButton");
 
 let histogramChart;
 
-//Optener los datos
 document.addEventListener("inputDataUpdated", function (e) {
-  conjuntoDatos = e.detail;
-  console.log(conjuntoDatos);
+  rawDataSet = e.detail;
+  calculateData();
   updateTable();
-  initializeGraph();
+  /*
+  initializeGraph();*/
   updateButtonStates();
 });
+
+function calculateData() {
+  currentDataSet = rawDataSet;
+
+  meanSet = [];
+  medianSet = [];
+  standardDeviationSet = [];
+
+  discardedItems = [];
+  remainingItems = [];
+
+  currentDataSetIndex = 0;
+  let zetalizedItems = [];
+
+  let mean = calculateMean(currentDataSet);
+  let median = calculateMedian(currentDataSet);
+  let standardDeviation = calculateStandardDeviation(currentDataSet, mean);
+
+  meanSet.push(mean);
+  medianSet.push(median);
+  standardDeviationSet.push(standardDeviation);
+
+  zetalizedItems = calculateZScores(currentDataSet, mean, standardDeviation);
+}
+
+function calculateMean(dataset) {
+  let total = 0;
+  for (let i = 0; i < dataset.length; i++) {
+    total += dataset[i];
+  }
+  let mean = total / dataset.length;
+  return parseFloat(mean);
+}
+
+function calculateMedian(dataset) {
+  dataset = [...dataset].sort((a, b) => a - b);
+  const half = Math.floor(dataset.length / 2);
+
+  return dataset.length % 2
+    ? parseFloat(dataset[half])
+    : parseFloat((dataset[half - 1] + dataset[half]) / 2);
+}
+
+function calculateStandardDeviation(dataset, mean) {
+  let n = dataset.length;
+  let total = 0;
+  if (n <= 1) return 0;
+
+  let variance =
+    dataset.reduce((total, x) => total + Math.pow(x - mean, 2), 0) / (n - 1);
+
+  let s = Math.sqrt(total / n - 1);
+
+  return Math.sqrt(variance);
+}
+
+function calculateZScores(dataset, mean, standardDeviation) {
+  let z_n = 0;
+
+  if (standardDeviation === 0) {
+    return dataset.map(() => 0);
+  }
+
+  let zValues = dataset.map((x) => ((x - mean) / standardDeviation).toFixed(2));
+  return zValues;
+}
+
+/*
+function zetalizeItem(item, mean, standardDeviation) {
+  if (standardDeviation === 0) return 0;
+
+  let z = ((item - mean) / standardDeviation).toFixed(2);
+
+  return z;
+}*/
 
 function updateTable() {
   dataTable.innerHTML =
@@ -48,9 +113,9 @@ function updateTable() {
     row.insertCell(0).textContent = i + 1;
     row.insertCell(1).textContent = meanSet[i].toFixed(2);
     row.insertCell(2).textContent = medianSet[i].toFixed(2);
-    row.insertCell(3).textContent = standardDeviation[i].toFixed(2);
+    row.insertCell(3).textContent = standardDeviationSet[i].toFixed(2); /*
     row.insertCell(4).textContent = discardedItems[i].join(", ");
-    row.insertCell(5).textContent = remainingItems[i].join(", ");
+    row.insertCell(5).textContent = remainingItems[i].join(", ");*/
   }
 
   dataTable.appendChild(tbody);
@@ -84,6 +149,29 @@ function updateButtonStates() {
   } else {
     grahpRightButton.classList.remove("icon-button-disable");
   }
+}
+
+function calculateBins(datos, numBins) {
+  const min = Math.min(...datos);
+  const max = Math.max(...datos);
+  const binSize = (max - min) / numBins;
+
+  let bins = [];
+  let labels = [];
+
+  for (let i = 0; i < numBins; i++) {
+    let lowerBound = min + i * binSize;
+    let upperBound = min + (i + 1) * binSize;
+    labels.push(`${lowerBound.toFixed(1)} - ${upperBound.toFixed(1)}`);
+    bins.push(0);
+  }
+
+  datos.forEach((value) => {
+    let index = Math.min(Math.floor((value - min) / binSize), numBins - 1);
+    bins[index]++;
+  });
+
+  return { labels, bins };
 }
 
 function initializeGraph() {
