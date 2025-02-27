@@ -229,6 +229,10 @@ main li {
   padding: 12px 15px;
 }
 
+.styled_table td {
+  vertical-align: top;
+}
+
 .styled_table tbody tr:nth-of-type(even) {
   background-color: #ebebeb;
 }

@@ -10,6 +10,7 @@ let standardDeviationSet = [];
 let discardedItems = [];
 let remainingItems = [];
 let currentDataSetIndex = 0;
+let maxDataSetIndex = 0;
 
 //Componentes html
 const dataTable = document.getElementById("dataTable");
@@ -22,14 +23,12 @@ document.addEventListener("inputDataUpdated", function (e) {
   rawDataSet = e.detail;
   calculateData();
   updateTable();
-  /*
-  initializeGraph();*/
+  initializeGraph();
   updateButtonStates();
 });
 
 function calculateData() {
   currentDataSet = rawDataSet;
-
   meanSet = [];
   medianSet = [];
   standardDeviationSet = [];
@@ -38,17 +37,34 @@ function calculateData() {
   remainingItems = [];
 
   currentDataSetIndex = 0;
-  let zetalizedItems = [];
+  maxDataSetIndex = 0;
 
-  let mean = calculateMean(currentDataSet);
-  let median = calculateMedian(currentDataSet);
-  let standardDeviation = calculateStandardDeviation(currentDataSet, mean);
+  let remainig = [];
+  let discarded = [];
+  do {
+    let mean = calculateMean(currentDataSet);
+    let median = calculateMedian(currentDataSet);
+    let standardDeviation = calculateStandardDeviation(currentDataSet, mean);
+    let zetalizedItems = calculateZScores(
+      currentDataSet,
+      mean,
+      standardDeviation
+    );
 
-  meanSet.push(mean);
-  medianSet.push(median);
-  standardDeviationSet.push(standardDeviation);
+    remainig = [];
+    discarded = [];
 
-  zetalizedItems = calculateZScores(currentDataSet, mean, standardDeviation);
+    [remainig, discarded] = filterDataByZScores(currentDataSet, zetalizedItems);
+
+    meanSet.push(mean);
+    medianSet.push(median);
+    standardDeviationSet.push(standardDeviation);
+    remainingItems.push(remainig);
+    discardedItems.push(discarded);
+
+    currentDataSet = remainig;
+    maxDataSetIndex++;
+  } while (discarded.length > 0);
 }
 
 function calculateMean(dataset) {
@@ -83,14 +99,24 @@ function calculateStandardDeviation(dataset, mean) {
 }
 
 function calculateZScores(dataset, mean, standardDeviation) {
-  let z_n = 0;
+  if (standardDeviation === 0) return dataset.map(() => 0);
 
-  if (standardDeviation === 0) {
-    return dataset.map(() => 0);
-  }
+  return dataset.map((x) =>
+    parseFloat((x - mean) / standardDeviation).toFixed(2)
+  );
+}
 
-  let zValues = dataset.map((x) => ((x - mean) / standardDeviation).toFixed(2));
-  return zValues;
+function filterDataByZScores(dataset, zScores) {
+  let remainingItemsAux = [];
+  let discardedItemsAux = [];
+  dataset.forEach((value, index) => {
+    if (zScores[index] >= -3 && zScores[index] <= 3) {
+      remainingItemsAux.push(value);
+    } else {
+      discardedItemsAux.push(value);
+    }
+  });
+  return [remainingItemsAux, discardedItemsAux];
 }
 
 /*
@@ -104,7 +130,7 @@ function zetalizeItem(item, mean, standardDeviation) {
 
 function updateTable() {
   dataTable.innerHTML =
-    "<thead><tr><th>Iteración</th><th>Media</th><th>Mediana</th><th>Desviación Estándar</th><th>Items Descartados</th><th>Items Restantes</th></tr></thead>";
+    "<thead><tr><th>Iteración</th><th>Media</th><th>Mediana</th><th>Desviación Estándar</th><th>Items Descartados</th><th>Cantidad de Items Restantes</th></tr></thead>";
 
   let tbody = document.createElement("tbody");
 
@@ -113,11 +139,10 @@ function updateTable() {
     row.insertCell(0).textContent = i + 1;
     row.insertCell(1).textContent = meanSet[i].toFixed(2);
     row.insertCell(2).textContent = medianSet[i].toFixed(2);
-    row.insertCell(3).textContent = standardDeviationSet[i].toFixed(2); /*
+    row.insertCell(3).textContent = standardDeviationSet[i].toFixed(2);
     row.insertCell(4).textContent = discardedItems[i].join(", ");
-    row.insertCell(5).textContent = remainingItems[i].join(", ");*/
+    row.insertCell(5).textContent = remainingItems[i].length;
   }
-
   dataTable.appendChild(tbody);
 }
 
@@ -144,7 +169,7 @@ function updateButtonStates() {
     grahpLeftButton.classList.remove("icon-button-disable");
   }
 
-  if (currentDataSetIndex === remainingItems.length - 1) {
+  if (currentDataSetIndex === maxDataSetIndex - 1) {
     grahpRightButton.classList.add("icon-button-disable");
   } else {
     grahpRightButton.classList.remove("icon-button-disable");
