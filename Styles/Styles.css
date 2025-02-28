@@ -77,6 +77,10 @@ p {
   opacity: 0.8;
 }
 
+.button_first:active {
+  color: var(--title_color);
+}
+
 hr {
   border: none;
   height: 2px;
@@ -234,7 +238,7 @@ main li {
 }
 
 .styled_table tbody tr:nth-of-type(even) {
-  background-color: #ebebeb;
+  background-color: #f1f1f1;
 }
 
 .styled_table tbody tr {
@@ -297,6 +301,10 @@ main li {
 
 #grahpRightButton {
   border-radius: 0 4px 4px 0;
+}
+
+.icon-button:active:not(.icon-button-disable) {
+  background-color: var(--blue_1);
 }
 /******************************************** Footer ********************************************/
 

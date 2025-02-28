@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Probabilidad y estadística</title>
     <link rel="stylesheet" href="../Styles/Styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <aside>
@@ -42,18 +46,75 @@
           <h2>¿En qué consiste?</h2>
           <p>
             Al ingresar un dataset en la entrada, se calculará iterativamente la
-            desviación estándar, se 'zetalirarán' los datos y se cortarán
-            completamente los datos raros -aquellos cuyo número de desviaciones
-            estándar de distancia sea iguales o mayores a tres-. Como resultado
-            entregará la siguiente información por cada iteración:
+            desviación estándar, se 'zetalirarán' los datos y se cortará el dato
+            más alejado de la media -aquel cuyo número de desviaciones estándar
+            de distancia sea el mayor-. Como resultado entregará la siguiente
+            información por cada iteración:
           </p>
           <ul>
-            <li>Desviación estándar de los datos actuales</li>
-            <li>Lista de ítems removidos</li>
-            <li>lista de valores restantes</li>
+            <li>Media</li>
+            <li>Mediana</li>
+            <li>Desviación estándar</li>
+            <li>ítem removido</li>
+            <li>Cantidad de valores restantes</li>
             <li>Histograma</li>
-            <li>Diagrama de caja</li>
           </ul>
+          <p></p>
+          <textarea
+            name="datasetInput"
+            id="datasetInput"
+            placeholder="Ingrese los datos separados por comas aquí."
+          ></textarea>
+          <button class="button_first button_general" id="dataButton">
+            Ingresar Datos
+          </button>
+          <div class="toggleable_container" id="toggleable_container">
+            <hr />
+            <h2>Datos calculados</h2>
+            <table class="styled_table" id="dataTable">
+              <thead>
+                <tr>
+                  <th>Iteración</th>
+                  <th>Media</th>
+                  <th>Mediana</th>
+                  <th>Desviación Estándar</th>
+                  <th>Items Descartados</th>
+                  <th>Items Restantes (cantidad)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <h2>Evolución de los datos a través de las iteraciones</h2>
+            <div class="canvas_container">
+              <canvas id="histogramCanvas"></canvas>
+              <div class="canvas_button_container">
+                <button
+                  class="icon-button"
+                  id="grahpLeftButton"
+                  title="mostrar gráfica anterior"
+                >
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button
+                  class="icon-button"
+                  id="grahpRightButton"
+                  title="mostrar siguiente gráfica"
+                >
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </main>
         <footer class="shadow">
           <p>
@@ -67,5 +128,9 @@
         </footer>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../Scripts/DataInputManagement.js"></script>
+    <script src="../Scripts/Filter_2.js"></script>
+    <script src="../Scripts/ToggleableComponent.js"></script>
   </body>
 </html>

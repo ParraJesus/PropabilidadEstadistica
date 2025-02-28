@@ -119,15 +119,6 @@ function filterDataByZScores(dataset, zScores) {
   return [remainingItemsAux, discardedItemsAux];
 }
 
-/*
-function zetalizeItem(item, mean, standardDeviation) {
-  if (standardDeviation === 0) return 0;
-
-  let z = ((item - mean) / standardDeviation).toFixed(2);
-
-  return z;
-}*/
-
 function updateTable() {
   dataTable.innerHTML =
     "<thead><tr><th>Iteración</th><th>Media</th><th>Mediana</th><th>Desviación Estándar</th><th>Items Descartados</th><th>Cantidad de Items Restantes</th></tr></thead>";
@@ -235,6 +226,7 @@ function initializeGraph() {
 function updateGraph(index) {
   currentDataSetIndex = index;
   histogramChart.data.datasets[0].data = remainingItems[currentDataSetIndex];
+  console.log(remainingItems[currentDataSetIndex].length);
   histogramChart.data.datasets[0].label = `Datos de la iteración ${
     currentDataSetIndex + 1
   }`;
