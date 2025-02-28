@@ -53,6 +53,7 @@
             <li>Frecuencia absoluta acomulada</li>
             <li>Frecuencia relativa</li>
             <li>Frecuencia relativa acomulada</li>
+            <li>Histograma</li>
           </ul>
           <p></p>
           <textarea
@@ -71,7 +72,7 @@
           </button>
           <div class="toggleable_container" id="toggleable_container">
             <hr />
-            <h2>Datos calculados</h2>
+            <h2>Datos tabulados</h2>
             <table class="styled_table" id="dataTable">
               <thead>
                 <tr>
@@ -95,7 +96,12 @@
               </tbody>
             </table>
             <hr />
+            <h2>Histograma</h2>
+            <div class="canvas_container">
+              <canvas id="histogramCanvas"></canvas>
+            </div>
           </div>
+          <hr />
         </main>
         <footer class="shadow">
           <p>
@@ -109,6 +115,7 @@
         </footer>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../Scripts/TabulationInputManagement.js"></script>
     <script src="../Scripts/Tabulation.js"></script>
     <script src="../Scripts/ToggleableComponent.js"></script>

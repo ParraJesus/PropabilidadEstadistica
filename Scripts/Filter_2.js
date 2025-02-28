@@ -106,21 +106,6 @@ function calculateZScores(dataset, mean, standardDeviation) {
   );
 }
 
-/*
-function filterDataByZScores(dataset, zScores) {
-  let remainingItemsAux = [];
-  let discardedItemsAux = [];
-  dataset.forEach((value, index) => {
-    if (zScores[index] >= -3 && zScores[index] <= 3) {
-      remainingItemsAux.push(value);
-    } else {
-      discardedItemsAux.push(value);
-    }
-  });
-  return [remainingItemsAux, discardedItemsAux];
-}
-*/
-
 function filterDataByZScores(dataset, zScores) {
   let remainingItemsAux = [...dataset];
   let discardedItemsAux = [];
@@ -128,7 +113,6 @@ function filterDataByZScores(dataset, zScores) {
   let maxAbsZIndex = -1;
   let maxAbsZValue = -Infinity;
 
-  // Encontrar el índice del elemento con el mayor valor absoluto de zScore fuera del rango [-3, 3]
   for (let i = 0; i < zScores.length; i++) {
     let absZ = Math.abs(zScores[i]);
     if ((zScores[i] < -3 || zScores[i] > 3) && absZ > maxAbsZValue) {
@@ -137,7 +121,6 @@ function filterDataByZScores(dataset, zScores) {
     }
   }
 
-  // Si encontramos un valor que debe eliminarse, lo movemos a discardedItemsAux
   if (maxAbsZIndex !== -1) {
     discardedItemsAux.push(remainingItemsAux[maxAbsZIndex]);
     remainingItemsAux.splice(maxAbsZIndex, 1);
@@ -194,23 +177,26 @@ function updateButtonStates() {
   }
 }
 
-function calculateBins(datos, numBins) {
-  const min = Math.min(...datos);
-  const max = Math.max(...datos);
-  const binSize = (max - min) / numBins;
+function calculateGroups(currentDataSet, groupAmount = 10) {
+  if (currentDataSet.length === 0) return { labels: [], bins: [] };
 
-  let bins = [];
+  const min = Math.min(...currentDataSet);
+  const max = Math.max(...currentDataSet);
+  const interval = (max - min) / groupAmount;
+
+  let bins = new Array(groupAmount).fill(0);
   let labels = [];
 
-  for (let i = 0; i < numBins; i++) {
-    let lowerBound = min + i * binSize;
-    let upperBound = min + (i + 1) * binSize;
-    labels.push(`${lowerBound.toFixed(1)} - ${upperBound.toFixed(1)}`);
-    bins.push(0);
+  for (let i = 0; i < groupAmount; i++) {
+    let lowerBound = min + i * interval;
+    let upperBound = lowerBound + interval;
+    if (i === groupAmount - 1) upperBound = max;
+
+    labels.push(`[${lowerBound.toFixed(2)} - ${upperBound.toFixed(2)}]`);
   }
 
-  datos.forEach((value) => {
-    let index = Math.min(Math.floor((value - min) / binSize), numBins - 1);
+  currentDataSet.forEach((value) => {
+    let index = Math.min(Math.floor((value - min) / interval), groupAmount - 1);
     bins[index]++;
   });
 
@@ -218,12 +204,17 @@ function calculateBins(datos, numBins) {
 }
 
 function initializeGraph() {
+  if (histogramChart) {
+    histogramChart.destroy();
+  }
+
+  let { labels, bins } = calculateGroups(remainingItems[currentDataSetIndex]);
   const data = {
-    labels: ["0-10", "10-20", "20-30", "30-40", "40-50"],
+    labels: labels,
     datasets: [
       {
         label: `Datos de la iteración ${currentDataSetIndex + 1}`,
-        data: remainingItems[currentDataSetIndex],
+        data: bins,
         backgroundColor: "#698949AA",
         borderColor: "#698949",
         borderWidth: 2,
@@ -248,14 +239,19 @@ function initializeGraph() {
 
   const ctx = document.getElementById("histogramCanvas").getContext("2d");
   histogramChart = new Chart(ctx, config);
+  histogramChart.update();
 }
 
 function updateGraph(index) {
   currentDataSetIndex = index;
-  histogramChart.data.datasets[0].data = remainingItems[currentDataSetIndex];
-  console.log(remainingItems[currentDataSetIndex].length);
+
+  let { labels, bins } = calculateGroups(remainingItems[currentDataSetIndex]);
+
+  histogramChart.data.labels = labels;
+  histogramChart.data.datasets[0].data = bins;
   histogramChart.data.datasets[0].label = `Datos de la iteración ${
     currentDataSetIndex + 1
   }`;
+
   histogramChart.update();
 }
