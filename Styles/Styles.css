@@ -104,6 +104,17 @@ textarea:focus {
   border: 2px solid var(--blue_1);
 }
 
+input[type="text"] {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: var(--paragrahp_color);
+  border: 2px solid var(--blue_3);
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+  padding: 10px;
+}
+
 .shadow {
   box-shadow: 0 0 20px 1px var(--shadow-color-2);
 }

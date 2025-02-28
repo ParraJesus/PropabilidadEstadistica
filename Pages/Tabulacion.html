@@ -12,7 +12,7 @@
       <ul>
         <hr />
         <li>
-          <a href="../Index.html">Primer Filtro</a>
+          <a href="../index.html">Primer Filtro</a>
         </li>
         <hr />
         <li>
@@ -41,19 +41,61 @@
         <main>
           <h2>¿En qué consiste?</h2>
           <p>
-            Al ingresar un dataset en la entrada, se calculará iterativamente la
-            desviación estándar, se 'zetalirarán' los datos y se cortarán
-            completamente los datos raros -aquellos cuyo número de desviaciones
-            estándar de distancia sea iguales o mayores a tres-. Como resultado
-            entregará la siguiente información por cada iteración:
+            Al ingresar un dataset en las entrada, se calculará dinámicamente
+            los campos de una tabla de frecuencias, agrupando por la cantidad de
+            tuplas que se ingresen. Al finalizar las computaciones se entregará
+            lo siguiente:
           </p>
           <ul>
-            <li>Desviación estándar de los datos actuales</li>
-            <li>Lista de ítems removidos</li>
-            <li>lista de valores restantes</li>
-            <li>Histograma</li>
-            <li>Diagrama de caja</li>
+            <li>Grupos</li>
+            <li>Marca de clase</li>
+            <li>Frecuencia absoluta</li>
+            <li>Frecuencia absoluta acomulada</li>
+            <li>Frecuencia relativa</li>
+            <li>Frecuencia relativa acomulada</li>
           </ul>
+          <p></p>
+          <textarea
+            name="datasetInput"
+            id="datasetInput"
+            placeholder="Ingrese los datos separados por comas aquí."
+          ></textarea>
+          <input
+            type="text"
+            value="10"
+            placeholder="Ingrese la cantidad de clases deseadas"
+            id="groupAmountInput"
+          />
+          <button class="button_first button_general" id="dataButton">
+            Ingresar Datos
+          </button>
+          <div class="toggleable_container" id="toggleable_container">
+            <hr />
+            <h2>Datos calculados</h2>
+            <table class="styled_table" id="dataTable">
+              <thead>
+                <tr>
+                  <th>Clases</th>
+                  <th>Marca de clase</th>
+                  <th>Frecuencia absoluta</th>
+                  <th>Frecuencia absoluta acumulada</th>
+                  <th>Frecuencia relativa</th>
+                  <th>Frecuencia relativa acumulada</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+          </div>
         </main>
         <footer class="shadow">
           <p>
@@ -67,5 +109,8 @@
         </footer>
       </div>
     </div>
+    <script src="../Scripts/TabulationInputManagement.js"></script>
+    <script src="../Scripts/Tabulation.js"></script>
+    <script src="../Scripts/ToggleableComponent.js"></script>
   </body>
 </html>

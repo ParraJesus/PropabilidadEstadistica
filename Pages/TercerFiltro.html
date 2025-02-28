@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Probabilidad y estadística</title>
     <link rel="stylesheet" href="../Styles/Styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <aside>
@@ -12,7 +16,7 @@
       <ul>
         <hr />
         <li>
-          <a href="../Index.html">Primer Filtro</a>
+          <a href="../index.html">Primer Filtro</a>
         </li>
         <hr />
         <li>
@@ -41,17 +45,19 @@
         <main>
           <h2>¿En qué consiste?</h2>
           <p>
-            Al ingresar un dataset en la entrada, se calculará iterativamente la
-            desviación estándar, se 'zetalirarán' los datos y se cortarán
-            completamente los datos raros -aquellos cuyo número de desviaciones
-            estándar de distancia sea iguales o mayores a tres-. Como resultado
-            entregará la siguiente información por cada iteración:
+            Al ingresar un dataset en la entrada, se calculará los percentiles y
+            requerimientos necesarios para realizar el box plot de los datos. En
+            cada iteración se eliminarán todos los elementos considerados
+            outliners. Al final, para cada iteración se mostrará:
           </p>
           <ul>
-            <li>Desviación estándar de los datos actuales</li>
+            <li>Media</li>
+            <li>Mediana</li>
+            <li>Desviación estándar</li>
+            <li>Extremo superior</li>
+            <li>Extremo inferior</li>
             <li>Lista de ítems removidos</li>
             <li>lista de valores restantes</li>
-            <li>Histograma</li>
             <li>Diagrama de caja</li>
           </ul>
         </main>
