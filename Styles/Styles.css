@@ -9,6 +9,7 @@
   --blue_2: #79adc0;
   --blue_3: #b5eaec;
   --green_0: #698949;
+  --magenta_0: #af64bb;
   --white: #ebebeb;
 
   --shadow-color-1: #000a;
@@ -306,11 +307,13 @@ main li {
   opacity: 100%;
 }
 
-#grahpLeftButton {
+#grahpLeftButton,
+#boxplotLeftButton {
   border-radius: 4px 0 0 4px;
 }
 
-#grahpRightButton {
+#grahpRightButton,
+#boxplotRightButton {
   border-radius: 0 4px 4px 0;
 }
 

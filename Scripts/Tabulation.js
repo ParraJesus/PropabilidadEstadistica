@@ -19,10 +19,6 @@ document.addEventListener("tabulationInputDataUpdated", function (e) {
 
   rawDataSet = dataReceived.dataSet;
   groupAmount = dataReceived.groupAmount;
-
-  console.log("Datos crudos: ", rawDataSet);
-  console.log("Cantidad de grupos: ", groupAmount);
-
   calculateData();
   updateTable();
   initializeGraph();

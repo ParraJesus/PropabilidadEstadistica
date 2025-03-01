@@ -12,7 +12,11 @@
   </head>
   <body>
     <aside>
-      <div alt="Foto de usuario" class="user_pfp"></div>
+      <div
+        alt="Foto de usuario"
+        class="user_pfp"
+        title="Jesús Gabriel Parra"
+      ></div>
       <ul>
         <hr />
         <li>
@@ -56,10 +60,68 @@
             <li>Desviación estándar</li>
             <li>Extremo superior</li>
             <li>Extremo inferior</li>
-            <li>Lista de ítems removidos</li>
+            <li>Lista de outliers</li>
             <li>lista de valores restantes</li>
             <li>Diagrama de caja</li>
           </ul>
+          <p></p>
+          <textarea
+            name="datasetInput"
+            id="datasetInput"
+            placeholder="Ingrese los datos separados por comas aquí."
+          ></textarea>
+          <button class="button_first button_general" id="dataButton">
+            Ingresar Datos
+          </button>
+          <div class="toggleable_container" id="toggleable_container">
+            <hr />
+            <h2>Datos calculados</h2>
+            <table class="styled_table" id="boxplotTable">
+              <thead>
+                <tr>
+                  <th>Iteración</th>
+                  <th>Media</th>
+                  <th>Mediana</th>
+                  <th>Extremo Superior</th>
+                  <th>Extremo Inferior</th>
+                  <th>Items Removidos</th>
+                  <th>Items Restantes (cantidad)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <h2>Evolución de los datos a través de las iteraciones</h2>
+            <div class="canvas_container">
+              <canvas id="boxplot"></canvas>
+              <div class="canvas_button_container">
+                <button
+                  class="icon-button"
+                  id="boxplotLeftButton"
+                  title="mostrar gráfica anterior"
+                >
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button
+                  class="icon-button"
+                  id="boxplotRightButton"
+                  title="mostrar siguiente gráfica"
+                >
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </main>
         <footer class="shadow">
           <p>
@@ -74,4 +136,9 @@
       </div>
     </div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot@3.6.0/build/index.umd.min.js"></script>
+  <script src="../Scripts/DataInputManagement.js"></script>
+  <script src="../Scripts/Filter_3.js"></script>
+  <script src="../Scripts/ToggleableComponent.js"></script>
 </html>
