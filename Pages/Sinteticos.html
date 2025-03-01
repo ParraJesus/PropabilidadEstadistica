@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Probabilidad y estadística</title>
     <link rel="stylesheet" href="../Styles/Styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
   </head>
   <body>
     <aside>
@@ -24,7 +20,7 @@
         </li>
         <hr />
         <li>
-          <a href="#">Segundo Filtro</a>
+          <a href="SegundoFiltro.html">Segundo Filtro</a>
         </li>
         <hr />
         <li>
@@ -40,7 +36,7 @@
         </li>
         <hr />
         <li>
-          <a href="Sinteticos.html">Datos sintéticos</a>
+          <a href="#">Datos sintéticos</a>
         </li>
         <hr />
       </ul>
@@ -48,24 +44,26 @@
     <div class="content_container">
       <div class="content">
         <header class="header shadow">
-          <h1>Segundo Filtro</h1>
+          <h1>Generación de datos sintéticos</h1>
         </header>
         <main>
           <h2>¿En qué consiste?</h2>
           <p>
-            Al ingresar un dataset en la entrada, se calculará iterativamente la
-            desviación estándar, se 'zetalirarán' los datos y se cortará el dato
-            más alejado de la media -aquel cuyo número de desviaciones estándar
-            de distancia sea el mayor-. Como resultado entregará la siguiente
-            información por cada iteración:
+            Se toma como entrada una cantidad de datos crudos la cantidad de
+            clases por las que se quiere agrupar y la cantidad de datos deseados
+            a simular, A partir de esos datos, se entregará una nueva cantidad
+            de ítems con la misma tendencia estadística. Al finalizar las
+            computaciones se obtendrá:
           </p>
           <ul>
-            <li>Media</li>
-            <li>Mediana</li>
-            <li>Desviación estándar</li>
-            <li>ítem removido</li>
-            <li>Cantidad de valores restantes</li>
-            <li>Histograma</li>
+            <li>Grupos</li>
+            <li>Marca de clase</li>
+            <li>Frecuencia absoluta</li>
+            <li>Frecuencia absoluta acomulada</li>
+            <li>Frecuencia relativa</li>
+            <li>Frecuencia relativa acomulada</li>
+            <li>Histograma de datos originales</li>
+            <li>Histograma de datos simulados</li>
           </ul>
           <p></p>
           <textarea
@@ -73,21 +71,27 @@
             id="datasetInput"
             placeholder="Ingrese los datos separados por comas aquí."
           ></textarea>
+          <input
+            type="text"
+            value="10"
+            placeholder="Ingrese la cantidad de clases deseadas"
+            id="groupAmountInput"
+          />
           <button class="button_first button_general" id="dataButton">
             Ingresar Datos
           </button>
           <div class="toggleable_container" id="toggleable_container">
             <hr />
-            <h2>Datos calculados</h2>
+            <h2>Datos tabulados</h2>
             <table class="styled_table" id="dataTable">
               <thead>
                 <tr>
-                  <th>Iteración</th>
-                  <th>Media</th>
-                  <th>Mediana</th>
-                  <th>Desviación Estándar</th>
-                  <th>Items Descartados</th>
-                  <th>Items Restantes (cantidad)</th>
+                  <th>Clases</th>
+                  <th>Marca de clase</th>
+                  <th>Frecuencia absoluta</th>
+                  <th>Frecuencia absoluta acumulada</th>
+                  <th>Frecuencia relativa</th>
+                  <th>Frecuencia relativa acumulada</th>
                 </tr>
               </thead>
               <tbody>
@@ -102,27 +106,12 @@
               </tbody>
             </table>
             <hr />
-            <h2>Evolución de los datos a través de las iteraciones</h2>
+            <h2>Histograma</h2>
             <div class="canvas_container">
               <canvas id="histogramCanvas"></canvas>
-              <div class="canvas_button_container">
-                <button
-                  class="icon-button"
-                  id="grahpLeftButton"
-                  title="mostrar gráfica anterior"
-                >
-                  <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button
-                  class="icon-button"
-                  id="grahpRightButton"
-                  title="mostrar siguiente gráfica"
-                >
-                  <i class="fa-solid fa-chevron-right"></i>
-                </button>
-              </div>
             </div>
           </div>
+          <hr />
         </main>
         <footer class="shadow">
           <p>
@@ -137,8 +126,8 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../Scripts/DataInputManagement.js"></script>
-    <script src="../Scripts/Filter_2.js"></script>
+    <script src="../Scripts/TabulationInputManagement.js"></script>
+    <script src="../Scripts/Tabulation.js"></script>
     <script src="../Scripts/ToggleableComponent.js"></script>
   </body>
 </html>
