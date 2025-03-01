@@ -121,7 +121,7 @@ function calculateWhiskers(dataset, quartile25, quartile75) {
   return [maxWhisker, minWhisker];
 }
 
-function findOutliners(dataset, median, upperWhisker, lowerWhisker) {
+function findOutliners(dataset, upperWhisker, lowerWhisker) {
   let remainingItemsAux = [...dataset];
   let discardedItemsAux = [];
 
@@ -130,9 +130,19 @@ function findOutliners(dataset, median, upperWhisker, lowerWhisker) {
   );
 
   if (outliers.length > 0) {
-    let farthestOutlier = outliers.reduce((max, value) =>
-      Math.abs(value - median) > Math.abs(max - median) ? value : max
-    );
+    let farthestOutlier = outliers.reduce((max, value) => {
+      let distance =
+        value < lowerWhisker
+          ? Math.abs(value - lowerWhisker)
+          : Math.abs(value - upperWhisker);
+
+      let maxDistance =
+        max < lowerWhisker
+          ? Math.abs(max - lowerWhisker)
+          : Math.abs(max - upperWhisker);
+
+      return distance > maxDistance ? value : max;
+    });
 
     discardedItemsAux.push(farthestOutlier);
     remainingItemsAux = remainingItemsAux.filter(
