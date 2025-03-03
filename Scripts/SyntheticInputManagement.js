@@ -1,6 +1,7 @@
 const summitButton = document.getElementById("dataButton");
 const textAreaInput = document.getElementById("datasetInput");
-const textInput = document.getElementById("groupAmountInput");
+const groupInput = document.getElementById("groupAmountInput");
+const dataAmountInput = document.getElementById("syntheticDataAmountInput");
 
 function initializeInput(input) {
   input.addEventListener("input", function () {
@@ -18,7 +19,8 @@ function getDataItems() {
 function getInputData() {
   const data = {
     dataSet: getDataItems(),
-    groupAmount: parseInt(textInput.value),
+    groupAmount: parseInt(groupInput.value),
+    dataAmount: parseInt(dataAmountInput.value),
   };
 
   const onTabulationInputDataUpdated = new CustomEvent(
@@ -33,7 +35,8 @@ function getInputData() {
   document.dispatchEvent(onTabulationInputDataUpdated);
 }
 
-initializeInput(textInput);
+initializeInput(groupInput);
 initializeInput(textAreaInput);
+initializeInput(dataAmountInput);
 
 summitButton.addEventListener("click", getInputData);

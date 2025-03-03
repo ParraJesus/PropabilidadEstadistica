@@ -26,6 +26,5 @@ function getInputData() {
   document.dispatchEvent(onInputDataUpdated);
 }
 
-//esto es un comentario
 initializeInput("datasetInput");
 dataSummitButton.addEventListener("click", getInputData);

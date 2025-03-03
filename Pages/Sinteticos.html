@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Probabilidad y estadística</title>
     <link rel="stylesheet" href="../Styles/Styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <aside>
@@ -77,6 +81,12 @@
             placeholder="Ingrese la cantidad de clases deseadas"
             id="groupAmountInput"
           />
+          <input
+            type="text"
+            value="1000"
+            placeholder="Ingrese la cantidad items sintéticos a generar"
+            id="syntheticDataAmountInput"
+          />
           <button class="button_first button_general" id="dataButton">
             Ingresar Datos
           </button>
@@ -109,7 +119,30 @@
             <h2>Histograma</h2>
             <div class="canvas_container">
               <canvas id="histogramCanvas"></canvas>
+              <div class="canvas_button_container">
+                <button
+                  class="icon-button"
+                  id="grahpLeftButton"
+                  title="mostrar gráfica anterior"
+                >
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button
+                  class="icon-button"
+                  id="grahpRightButton"
+                  title="mostrar siguiente gráfica"
+                >
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
             </div>
+            <hr />
+            <h2>Datos Generados</h2>
+            <textarea
+              name="syntheticDataTextArea"
+              id="syntheticDataTextArea"
+              readonly
+            ></textarea>
           </div>
           <hr />
         </main>
@@ -126,8 +159,8 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../Scripts/TabulationInputManagement.js"></script>
-    <script src="../Scripts/Tabulation.js"></script>
+    <script src="../Scripts/SyntheticInputManagement.js"></script>
+    <script src="../Scripts/SyntheticTabulation.js"></script>
     <script src="../Scripts/ToggleableComponent.js"></script>
   </body>
 </html>
