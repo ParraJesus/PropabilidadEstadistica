@@ -325,6 +325,16 @@ main li {
 .icon-button:active:not(.icon-button-disable) {
   background-color: var(--blue_1);
 }
+
+.no_selectable {
+  outline: none;
+  border: none;
+}
+
+.no_selectable:focus {
+  border: none;
+}
+
 /******************************************** Footer ********************************************/
 
 footer {

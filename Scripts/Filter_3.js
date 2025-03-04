@@ -20,6 +20,7 @@ let maxDataSetIndex = 0;
 
 //Componentes html
 const dataTable = document.getElementById("boxplotTable");
+const resultingDataTextArea = document.getElementById("resultingDataTextArea");
 const boxplotLeftButton = document.getElementById("boxplotLeftButton");
 const boxplotRightButton = document.getElementById("boxplotRightButton");
 
@@ -84,6 +85,8 @@ function calculateData() {
     currentDataSet = remaining;
     maxDataSetIndex++;
   } while (discarded.length > 0);
+
+  resultingDataTextArea.value = `Datos finales: ${currentDataSet.length} \n [${currentDataSet}]`;
 }
 
 function calculateMean(dataset) {

@@ -14,6 +14,7 @@ let maxDataSetIndex = 0;
 
 //Componentes html
 const dataTable = document.getElementById("dataTable");
+const resultingDataTextArea = document.getElementById("resultingDataTextArea");
 const grahpLeftButton = document.getElementById("grahpLeftButton");
 const grahpRightButton = document.getElementById("grahpRightButton");
 
@@ -65,6 +66,8 @@ function calculateData() {
     currentDataSet = remainig;
     maxDataSetIndex++;
   } while (discarded.length > 0);
+
+  resultingDataTextArea.value = `Datos finales: ${currentDataSet.length} \n [${currentDataSet}]`;
 }
 
 function calculateMean(dataset) {
